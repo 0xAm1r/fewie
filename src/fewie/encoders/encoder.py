@@ -1,12 +1,17 @@
+from dataclasses import dataclass
 from typing import Optional
-
 import torch
 from transformers.file_utils import ModelOutput
+from transformers.modeling_outputs import ModelOutput
 
-
+@dataclass
 class EncoderOutput(ModelOutput):
+    """
+    Base class for encoder outputs
+    Args:
+        embeddings: Hidden-state embeddings at the output of the encoder
+    """
     embeddings: Optional[torch.FloatTensor] = None
-
 
 class Encoder(torch.nn.Module):
     def __init__(self) -> None:

@@ -1,18 +1,19 @@
+defaults:
+  - _self_
+  - dataset: base
+  - dataset_processor: base
+  - encoder: base
+  - evaluation/dataset: nway_kshot_5_1
+  - evaluation/classifier: logistic_regression  # Changed from base to actual classifier
+
 seed: 1234
-cuda_device: 0
+device: "mps"
 batch_size: 1
-text_column_name: tokens
-label_column_name: ner_tags
+text_column_name: "tokens"
+label_column_name: "ner_tags"
 f1_include_O: False
 scenario:
   name: few_shot_linear_readout
   metrics:
     - f1_micro
     - f1_macro
-
-defaults:
-  - dataset: conll2003
-  - dataset_processor: bert
-  - encoder: random
-  - evaluation/dataset: nway_kshot_5_1
-  - evaluation/classifier: logistic_regression

@@ -12,8 +12,8 @@ from fewie.utils import resolve_relative_path
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(config_name="config", config_path="config")
-def evaluate(cfg: DictConfig) -> None:
+@hydra.main(config_name="config", config_path="config", version_base="1.1")
+def evaluate(cfg):
     """
     Conducts evaluation given the configuration.
 

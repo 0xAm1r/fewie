@@ -27,12 +27,14 @@ def evaluate_config(cfg: DictConfig) -> Dict[str, Any]:
     """
     seed_everything(cfg.seed)
 
-    device = (
-        torch.device("cuda", cfg.cuda_device)
-        if cfg.cuda_device > -1
-        else torch.device("cpu")
-    )
-
+    # Device configuration 
+    device = torch.device("cpu")
+    if hasattr(cfg, "device"):
+        if cfg.device == "mps" and torch.backends.mps.is_available():
+            device = torch.device("mps")
+        elif cfg.device == "cuda" and torch.cuda.is_available():
+            device = torch.device("cuda")
+    
     dataset = instantiate(cfg.dataset)
 
     # numerize labels (NER tags in this case) to {0, 1, ..., #classes}
